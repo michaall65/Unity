@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public int hit = 3;
+    public int hit = 2;
     public int points = 100;
     [SerializeField] private Vector3 rotator;
     [SerializeField] private Material hitMaterial;
@@ -32,19 +32,15 @@ public class Brick : MonoBehaviour
         //score points
         if (hit <= 0)
         {
+            GameManager.Instance.score += points;
             renderering.sharedMaterial = hitMaterial;
             Destroy(gameObject);
         }
-        if (hit == 1)
-        {
-            renderering.sharedMaterial = OnehitMaterial;
-        }
-        if (hit > 1)
-        {
-            renderering.sharedMaterial = hitMaterial;
-            Invoke("BacktOrgMaterial", 0.05f);
-        }
-       
+
+        renderering.sharedMaterial = hitMaterial;
+        Invoke("BacktOrgMaterial", 0.05f);
+
+
 
     }
     void BacktOrgMaterial()

@@ -14,16 +14,58 @@ public class GameManager : MonoBehaviour
     public GameObject panelPlay;
     public GameObject panelGameOver;
     public GameObject panelLevelCompleted;
+
+    public GameObject[] levels;
+
+    GameObject currentball;
+    GameObject _currentlevel;
+
+    public static GameManager Instance{get; private set;}
+
+    private int scores;
+
+    public int score
+    {
+        get { return scores; }
+        set 
+        { scores = value; 
+          scoreText.text = "SCORE: " + scores;
+        }
+          
+    }
+
+    private int balls;
+
+    public int Balls
+    {
+        get { return balls; }
+        set { balls = value;
+            ballText.text = "BALLS: " + balls;
+        }
+    }
+
+    private int level;
+
+    public int Level
+    {
+        get { return level; }
+        set { level = value;
+            levelText.text = "LEVEL: " + level;
+        }
+    }
+
+
     public enum State {Menu,Init,GameOver,Play,LevelCompleted,LoadLevel};
     State _states;
 
     public void PlayClick()
     {
-        SwichState(State.Play);
+        SwichState(State.Init);
     }
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         SwichState(State.Menu);
     }
 
@@ -41,15 +83,33 @@ public class GameManager : MonoBehaviour
                 panelMenu.SetActive(true);
                 break;
             case State.Init:
+                panelPlay.SetActive(true);
+                score = 0;
+                Balls = 3;
+                Level = 0;
+                Instantiate(paddle);
+                SwichState(State.LoadLevel);
                 break;
             case State.LevelCompleted:
+                panelLevelCompleted.SetActive(true);
                 break;
             case State.LoadLevel:
+                if (Level >= levels.Length )
+                {
+                    SwichState(State.GameOver);
+                }
+                else
+                {
+                    _currentlevel = Instantiate(levels[Level]);
+                    SwichState(State.Play);
+                }
                 break;
             case State.GameOver:
+                panelGameOver.SetActive(true);
                 break;
             case State.Play:
-                panelPlay.SetActive(true);
+                ball.transform.position = new Vector3(0, 7, 0);
+                Instantiate(ball);
                 break;
         }
         
@@ -69,6 +129,17 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 break;
             case State.Play:
+                if (currentball == null)
+                {
+                    if (Balls > 0)
+                    {
+                        Instantiate(ball);
+                    }
+                    else
+                    {
+                        SwichState(State.GameOver);
+                    }
+                }
                 break;
         }
     }
@@ -82,11 +153,13 @@ public class GameManager : MonoBehaviour
             case State.Init:
                 break;
             case State.LevelCompleted:
+                panelLevelCompleted.SetActive(false);
                 break;
             case State.LoadLevel:
                 break;
             case State.GameOver:
                 panelPlay.SetActive(false);
+                panelGameOver.SetActive(false);
                 break;
             case State.Play:
                 break;
