@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] levels;
 
-    GameObject currentball;
-    GameObject _currentlevel;
+    GameObject _currentBall;
+    GameObject _currentLevel;
 
     public static GameManager Instance{get; private set;}
 
@@ -68,12 +68,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
         SwichState(State.Menu);
     }
-
     public void SwichState(State newState)
     {
         EndState();
+        _states = newState;
         BeginState(newState);
     }
+  
     // Update is called once per frame
     void BeginState(State newState)
     {
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    _currentlevel = Instantiate(levels[Level]);
+                    _currentLevel = Instantiate(levels[Level]);
                     SwichState(State.Play);
                 }
                 break;
@@ -108,8 +109,7 @@ public class GameManager : MonoBehaviour
                 panelGameOver.SetActive(true);
                 break;
             case State.Play:
-                ball.transform.position = new Vector3(0, 7, 0);
-                Instantiate(ball);
+                _currentBall = Instantiate(ball);
                 break;
         }
         
@@ -129,11 +129,11 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 break;
             case State.Play:
-                if (currentball == null)
+                if (_currentBall == null)
                 {
                     if (Balls > 0)
                     {
-                        Instantiate(ball);
+                        _currentBall = Instantiate(ball);
                     }
                     else
                     {

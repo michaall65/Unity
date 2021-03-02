@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3681211724007552931}
   - component: {fileID: 3681211724007552930}
   - component: {fileID: 3681211724007552929}
-  - component: {fileID: 3681211724007552928}
   - component: {fileID: 3681211724007552932}
+  - component: {fileID: 2088874392006380751}
   m_Layer: 0
   m_Name: Brick 2
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3681211724007552943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 10.223, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681211724007552943}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 5426383390628818845, guid: 4bc03065df8822d40b8f9d430dd9e12f, type: 3}
 --- !u!23 &3681211724007552929
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3681211724007552928
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3681211724007552943}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3681211724007552932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,3 +98,16 @@ MonoBehaviour:
   rotator: {x: 45, y: 0, z: 0}
   hitMaterial: {fileID: 2100000, guid: 5090d99129d52f54fa6fc70f6d66c0e3, type: 2}
   OnehitMaterial: {fileID: 2100000, guid: bfa02fd705e877145aa8924cb73cbf59, type: 2}
+--- !u!65 &2088874392006380751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681211724007552943}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8205585, y: 0.9102793, z: 0.45513964}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -3,7 +3,17 @@ guid: 6f4263e0aa3bad74db965067ec71c85a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ball: {fileID: 6080537605554660542, guid: 59da6d3e48e3b344d8d4d44cf75ffc07, type: 3}
+  - paddle: {fileID: 5076637958020497704, guid: 4283a1d55f75343498b9064039297bf2,
+      type: 3}
+  - scoreText: {instanceID: 0}
+  - levelText: {instanceID: 0}
+  - ballText: {instanceID: 0}
+  - panelMenu: {instanceID: 0}
+  - panelPlay: {instanceID: 0}
+  - panelGameOver: {instanceID: 0}
+  - panelLevelCompleted: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -7,11 +7,13 @@ public class Ball : MonoBehaviour
     float speed= 24f;
     Rigidbody _rigidbody;
     Vector3 _velocity;
+    Renderer renderering;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.velocity = Vector3.down*speed;
+        renderering = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -19,6 +21,12 @@ public class Ball : MonoBehaviour
     {
         _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
         _velocity = _rigidbody.velocity;
+
+        if (!renderering.isVisible)
+        {
+            GameManager.Instance.Balls--;
+            Destroy(gameObject);
+        }
     }
 
     // when ball hit the paddle and walls
