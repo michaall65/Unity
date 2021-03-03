@@ -12,8 +12,12 @@ public class Ball : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.velocity = Vector3.down*speed;
         renderering = GetComponent<Renderer>();
+        Invoke("Lunch", 1.0f);
+    }
+    void Lunch()
+    {
+        _rigidbody.velocity = Vector3.up * speed;
     }
 
     // Update is called once per frame

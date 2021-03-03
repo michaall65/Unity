@@ -10,10 +10,14 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text levelText;
     public Text ballText;
+    public Text HighScoreText;
     public GameObject panelMenu;
     public GameObject panelPlay;
     public GameObject panelGameOver;
     public GameObject panelLevelCompleted;
+    public GameObject panelBackToMenu;
+    private int i = 0;
+    public int scoretowin = 100;
 
     public GameObject[] levels;
 
@@ -62,11 +66,13 @@ public class GameManager : MonoBehaviour
     {
         SwichState(State.Init);
     }
+  
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         SwichState(State.Menu);
+        
     }
     public void SwichState(State newState)
     {
@@ -74,17 +80,34 @@ public class GameManager : MonoBehaviour
         _states = newState;
         BeginState(newState);
     }
+    private IEnumerator WaitForaSecond()
+    {
+        yield return new WaitForSeconds(2);
+        if(Level < 3)
+        {
+            Destroy(_currentLevel);
+        }
+        panelPlay.SetActive(true);
+        SwichState(State.LoadLevel);
+    }
   
     // Update is called once per frame
     void BeginState(State newState)
     {
-        switch(newState)
+        switch (newState)
         {
             case State.Menu:
+                Cursor.visible = true;
+                HighScoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("highscore");
                 panelMenu.SetActive(true);
                 break;
             case State.Init:
+                Cursor.visible = false;
                 panelPlay.SetActive(true);
+                if(_currentLevel != null)
+                {
+                    Destroy(_currentLevel);
+                }
                 score = 0;
                 Balls = 3;
                 Level = 0;
@@ -92,12 +115,17 @@ public class GameManager : MonoBehaviour
                 SwichState(State.LoadLevel);
                 break;
             case State.LevelCompleted:
+                Destroy(_currentBall);
+                Level++;
+                scoretowin += 700;
+                i++;
                 panelLevelCompleted.SetActive(true);
+                StartCoroutine(WaitForaSecond());
                 break;
             case State.LoadLevel:
                 if (Level >= levels.Length )
                 {
-                    SwichState(State.GameOver);
+                    SwichState(State.GameOver);             
                 }
                 else
                 {
@@ -106,7 +134,12 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case State.GameOver:
+                Level = 2;
                 panelGameOver.SetActive(true);
+                if(score > PlayerPrefs.GetInt("highscore"))
+                {
+                    PlayerPrefs.SetInt("highscore",score);
+                }
                 break;
             case State.Play:
                 _currentBall = Instantiate(ball);
@@ -127,8 +160,15 @@ public class GameManager : MonoBehaviour
             case State.LoadLevel:
                 break;
             case State.GameOver:
+                if(Input.anyKeyDown)
+                {
+                    Destroy(_currentBall);
+                    scoretowin = 100;
+                    SwichState(State.Menu);               
+                }
                 break;
             case State.Play:
+             
                 if (_currentBall == null)
                 {
                     if (Balls > 0)
@@ -139,6 +179,18 @@ public class GameManager : MonoBehaviour
                     {
                         SwichState(State.GameOver);
                     }
+                }
+                if(score >= scoretowin)
+                {
+                   SwichState(State.LevelCompleted);
+                }
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Destroy(_currentBall);
+                    scoretowin = 100;
+                    SwichState(State.Menu);
+
                 }
                 break;
         }
