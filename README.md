@@ -1,8 +1,3 @@
-Educational Materials
-
-https://www.youtube.com/watch?v=gCqOnchV4V0&t=1644s
-
-
 
 ![Screenshot (127)](https://user-images.githubusercontent.com/74863849/109731246-2e405180-7bbb-11eb-96af-cd80773bc71d.png)
 
@@ -13,6 +8,11 @@ https://www.youtube.com/watch?v=gCqOnchV4V0&t=1644s
 
 
 https://user-images.githubusercontent.com/74863849/109731283-3ef0c780-7bbb-11eb-979f-e28ad790b745.mp4
+
+
+Educational Materials
+
+https://www.youtube.com/watch?v=gCqOnchV4V0&t=1644s
 
 https://answers.unity.com/questions/1365313/wasdarrow-key-movement.html -  movement
 
